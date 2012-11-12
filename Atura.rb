@@ -1,4 +1,8 @@
 require 'gosu'
+require 'chingu'
+
+include Gosu
+include Chingu
 
 # Add all subfolders to the load path
 app_dir = File.expand_path(File.dirname(__FILE__))
@@ -10,5 +14,4 @@ sub_dirs.each do |d|
   Dir.entries(d).each { |r| require r if r =~ /\.rb$/ }
 end
 
-window = GameWindow.new
-window.show
+GameWindow.new.show
