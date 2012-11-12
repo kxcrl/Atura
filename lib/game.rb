@@ -1,4 +1,4 @@
-class GameWindow < Chingu::Window
+class Game < Chingu::Window
   def initialize
     super 1280, 800
 

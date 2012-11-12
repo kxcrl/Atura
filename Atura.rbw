@@ -14,4 +14,4 @@ sub_dirs.each do |d|
   Dir.entries(d).each { |r| require r if r =~ /\.rb$/ }
 end
 
-GameWindow.new.show
+Game.new.show
