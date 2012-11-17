@@ -1,16 +1,13 @@
 class Game < Chingu::Window
   def initialize
-    super 1280, 800
+    super 1280, 800, false
 
     self.caption = "Atura"
     self.input = {esc: :exit}
-
-    @background = Image["bg.jpg"]
-    @player = Player.create(zorder: 2, x: 420, y: 340)
   end
 
-  def draw
-    @player.draw
-    @background.draw(0, 0, 0);
+  def setup
+    retrofy
+    switch_game_state(Demo.new)
   end
 end

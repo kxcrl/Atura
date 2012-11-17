@@ -1,5 +1,5 @@
 class Player < Chingu::GameObject
-  traits :effect, :velocity
+  traits :velocity
 
   def initialize(options={})
     super(options)
