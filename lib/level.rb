@@ -6,16 +6,17 @@ class Level < GameState
     self.input = {e: :edit}
 
     @file = File.join(ROOT, "levels", LEVEL + ".yml")
-    load_game_objects(file: @file)
 
     @background = Image["bg.jpg"]
     init_physics
 
+    load_game_objects(@space, file: @file)
     @player = Player.new(@space, x: 200, y: 20 )
   end
 
   def init_physics
     @space = CP::Space.new
+    $space = @space
     @space.damping = 0.5
     @space.gravity = CP::Vec2.new(0, 10)
   end
