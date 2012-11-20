@@ -15,30 +15,32 @@ class Platform < Chingu::GameObject
   end
 
   # Fallback for testing
-  def setup
-    @image = Image["platform.png"]
-  end
+  # def setup
+  #   @image = Image["platform.png"]
+  # end
 
   # Removes new platforms from the editor
   def init_physics
-    body = CP::Body.new(10.0, 150.0)
+    @body = CP::Body.new(INFINITY, INFINITY)
+
 
     vertices = [
-      CP::Vec2.new(-200.0, -5.0),
-      CP::Vec2.new(-200.0, 5.0),
-      CP::Vec2.new(200.0, 5.0),
-      CP::Vec2.new(200.0, -5.0) ]
+      CP::Vec2.new(-200.0, -20.0),
+      CP::Vec2.new(-200.0, 20.0),
+      CP::Vec2.new(200.0, 20.0),
+      CP::Vec2.new(200.0, -20.0) ]
 
     @shape = CP::Shape::Poly.new(
-      body, vertices, CP::Vec2.new(0,0))
+      @body, vertices, CP::Vec2.new(0,0))
 
     @shape.body.p = CP::Vec2.new(x, y)
+    @shape.e = 1
+    @shape.u = 1
     @shape.collision_type = :platform
     @shape.object = self
 
     # Breaks the editor even more
-    @space.add_body @shape.body
-    @space.add_shape @shape
+    @space.add_static_shape(@shape)
   end
 
   def update

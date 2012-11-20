@@ -12,7 +12,7 @@ class Player < Chingu::GameObject
   end
 
   def init_physics
-    body = CP::Body.new(10.0, 150.0)
+    body = CP::Body.new(10, 150.0)
 
     vertices = [
       CP::Vec2.new(-25.0, -25.0),
@@ -32,6 +32,7 @@ class Player < Chingu::GameObject
   end
 
   def move_left
+    @shape.body.apply_force(CP::Vec2.new(-5000, 0),CP::Vec2.new(0, 0))
   end
 
   def move_right
