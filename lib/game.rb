@@ -1,6 +1,6 @@
 class Game < Chingu::Window
   def initialize
-    super 1280, 800, false
+    super SCREEN_WIDTH, SCREEN_HEIGHT, FULLSCREEN
 
     self.caption = "Atura"
     self.input = {esc: :exit}
@@ -8,6 +8,6 @@ class Game < Chingu::Window
 
   def setup
     retrofy
-    switch_game_state(Demo.new)
+    switch_game_state(Level.new)
   end
 end
