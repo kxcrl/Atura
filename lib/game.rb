@@ -7,7 +7,7 @@ class Game < Chingu::Window
   end
 
   def setup
-    retrofy
+    Gosu::enable_undocumented_retrofication
     switch_game_state(Level.new)
   end
 end
