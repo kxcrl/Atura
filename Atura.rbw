@@ -11,7 +11,7 @@ SCREEN_HEIGHT = 800
 FULLSCREEN = false
 TIMESTEP = 1.0 / 20.0
 SUBSTEPS = 10
-INFINITY = 1.0 / 0
+INFINITY = 1.0 / 0.0
 LEVEL = 'demo'
 
 # Add all subfolders to the load path

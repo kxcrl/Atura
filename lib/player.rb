@@ -39,15 +39,17 @@ class Player < Chingu::GameObject
 
 
   def move_left
-    @shape.body.slew(CP::Vec2.new((@shape.body.p.x - 5), (@shape.body.p.y) ), 1)
-    # @shape.body.v = CP::Vec2.new(-100, 0)
-    # @shape.body.apply_force(CP::Vec2.new(0, 1), CP::Vec2.new(0,0))
+    @shape.body.slew(CP::Vec2.new((@shape.body.p.x - 10), (@shape.body.p.y + @shape.body.v.y)), 1)
+    # @shape.body.v = CP::Vec2.new(-5, @shape.body.v.y)
+    # @shape.body.v = CP::Vec2.new(-5, @shape.body.v.y)
+    # @shape.body.apply_force(CP::Vec2.new(-100, 0), CP::Vec2.new(0, 0))
     # @shape.body.reset_forces
     # @shape.body.f = CP::Vec2.new(0,-10000)
   end
 
   def move_right
-    @shape.body.slew(CP::Vec2.new((@shape.body.p.x + 5), (@shape.body.p.y)), 1)
+    @shape.body.slew(CP::Vec2.new((@shape.body.p.x + 10), (@shape.body.p.y + @shape.body.v.y)), 1)
+    # @shape.body.slew(CP::Vec2.new((@shape.body.p.x + 5), (@shape.body.p.y + 9.8)), 1)
   end
 
   def update
