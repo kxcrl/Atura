@@ -6,7 +6,8 @@ class Player < Chingu::GameObject
 
     self.input = {
       holding_right: :move_right,
-      holding_left: :move_left}
+      holding_left: :move_left,
+      holding_up: :jump}
 
 
     @space = space
@@ -52,9 +53,16 @@ class Player < Chingu::GameObject
     # @shape.body.slew(CP::Vec2.new((@shape.body.p.x + 5), (@shape.body.p.y + 9.8)), 1)
   end
 
+  def jump
+    if @shape.body.v.y < 0.4 && @shape.body.v.y > -0.4
+      @shape.body.slew(CP::Vec2.new((@shape.body.p.x + @shape.body.v.x), (@shape.body.p.y - 50 + @shape.body.v.y)), 1)
+    end
+  end
+
   def update
     super
     self.x, self.y = @shape.body.p.x, @shape.body.p.y
+    @shape.body.v.x *= 0.8
     # @shape.body.v = CP::Vec2.new(10, 0)
   end
 

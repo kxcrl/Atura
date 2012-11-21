@@ -34,7 +34,7 @@ class Platform < Chingu::GameObject
       @body, vertices, CP::Vec2.new(0,0))
 
     @shape.body.p = CP::Vec2.new(x, y)
-    @shape.e = 0
+    @shape.e = 0.9
     @shape.u = 1
     @shape.collision_type = :platform
     @shape.object = self
