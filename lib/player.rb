@@ -2,14 +2,14 @@ class Player < Chingu::GameObject
   attr_accessor :body, :shape
 
   def initialize(space, options={})
+    super(options)
+
     self.input = {
       holding_right: :move_right,
       holding_left: :move_left}
 
 
     @space = space
-
-    super(options)
 
     @image = Image["player.png"]
     init_physics
@@ -28,7 +28,8 @@ class Player < Chingu::GameObject
       body, vertices, CP::Vec2.new(0,0))
 
     @shape.body.p = CP::Vec2.new(x, y)
-    @shape.body.v = CP::Vec2.new(0, 0)
+    # @shape.body.v = CP::Vec2.new(15, 0)
+    # @shape.body.apply_force(CP::Vec2.new(100,0), CP::Vec2.new(0,0))
     @shape.collision_type = :player
     @shape.object = self
 
@@ -38,20 +39,21 @@ class Player < Chingu::GameObject
 
 
   def move_left
-    # @shape.body.slew(CP::Vec2.new(0,-1000), 1)
-    @shape.body.v = CP::Vec2.new(0, -5)
-    # @shape.body.apply_force(CP::Vec2.new(0, -10000), CP::Vec2.new(0,0))
+    @shape.body.slew(CP::Vec2.new((@shape.body.p.x - 5), (@shape.body.p.y) ), 1)
+    # @shape.body.v = CP::Vec2.new(-100, 0)
+    # @shape.body.apply_force(CP::Vec2.new(0, 1), CP::Vec2.new(0,0))
     # @shape.body.reset_forces
     # @shape.body.f = CP::Vec2.new(0,-10000)
   end
 
   def move_right
+    @shape.body.slew(CP::Vec2.new((@shape.body.p.x + 5), (@shape.body.p.y)), 1)
   end
 
   def update
     super
-    # @shape.body.v = CP::Vec2.new(0, -5)
     self.x, self.y = @shape.body.p.x, @shape.body.p.y
+    # @shape.body.v = CP::Vec2.new(10, 0)
   end
 
 end
