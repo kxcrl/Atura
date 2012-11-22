@@ -26,16 +26,16 @@ class Platform < Chingu::GameObject
 
 
     vertices = [
-      CP::Vec2.new(-190.0, -30.0),
-      CP::Vec2.new(-190.0, 30.0),
-      CP::Vec2.new(190.0, 30.0),
-      CP::Vec2.new(190.0, -30.0) ]
+      CP::Vec2.new(-190.0, -24.0),
+      CP::Vec2.new(-190.0, 24.0),
+      CP::Vec2.new(190.0, 24.0),
+      CP::Vec2.new(190.0, -24.0) ]
 
     @shape = CP::Shape::Poly.new(
       @body, vertices, CP::Vec2.new(0,0))
 
     @shape.body.p = CP::Vec2.new(x, y)
-    @shape.e = 0.0
+    @shape.e = 1.0
     @shape.u = 1
     @shape.collision_type = :platform
     @shape.object = self

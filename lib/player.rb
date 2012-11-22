@@ -7,7 +7,7 @@ class Player < Chingu::GameObject
     self.input = {
       holding_right: :move_right,
       holding_left: :move_left,
-      holding_up: :jump}
+      up: :jump}
 
 
     @space = space
