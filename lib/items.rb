@@ -7,8 +7,9 @@ class Platform < Chingu::GameObject
   # you can now load objects into chipmunk from
   # the level.yml files.
   def initialize(space, options={})
-    @space = space
     super(options)
+
+    @space = space
 
     @image = Image["platform.png"]
     init_physics
@@ -25,16 +26,16 @@ class Platform < Chingu::GameObject
 
 
     vertices = [
-      CP::Vec2.new(-200.0, -20.0),
-      CP::Vec2.new(-200.0, 20.0),
-      CP::Vec2.new(200.0, 20.0),
-      CP::Vec2.new(200.0, -20.0) ]
+      CP::Vec2.new(-190.0, -30.0),
+      CP::Vec2.new(-190.0, 30.0),
+      CP::Vec2.new(190.0, 30.0),
+      CP::Vec2.new(190.0, -30.0) ]
 
     @shape = CP::Shape::Poly.new(
       @body, vertices, CP::Vec2.new(0,0))
 
     @shape.body.p = CP::Vec2.new(x, y)
-    @shape.e = 0.9
+    @shape.e = 0.0
     @shape.u = 1
     @shape.collision_type = :platform
     @shape.object = self

@@ -4,22 +4,22 @@
     :y: 592.0
     :angle: 0
     :zorder: 100
-    :factor_x: 1
-    :factor_y: 1
+    :factor_x: 1.0
+    :factor_y: 1.0
     :alpha: 255
 - Platform:
-    :x: 480.0
-    :y: 312.0
+    :x: 1080.0
+    :y: 568.0
     :angle: 0
     :zorder: 100
-    :factor_x: 1
-    :factor_y: 1
+    :factor_x: 1.0
+    :factor_y: 1.0
     :alpha: 255
 - Platform:
-    :x: 616.0
-    :y: 464.0
+    :x: 680.0
+    :y: 568.0
     :angle: 0
     :zorder: 100
-    :factor_x: 1
-    :factor_y: 1
+    :factor_x: 1.0
+    :factor_y: 1.0
     :alpha: 255

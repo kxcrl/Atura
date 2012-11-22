@@ -17,7 +17,7 @@ class Level < GameState
   def init_physics
     @space = CP::Space.new
     @space.damping = 1.0
-    @space.gravity = CP::Vec2.new(0, 9.8)
+    @space.gravity = CP::Vec2.new(0, 6.5)
   end
 
   def edit
