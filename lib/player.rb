@@ -70,7 +70,7 @@ class Player < Chingu::GameObject
     @cooling_down = true
     after(100) { @cooling_down = false }
     
-    PlayerBullet.create(:x => self.x, :y => self.y)
+    PlayerBullet.create(:x => @player.shape.body.p.x, :y => @player.shape.body.p.y)
   end
 
   def interaction

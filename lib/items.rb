@@ -45,15 +45,16 @@ class Platform < Chingu::GameObject
     @space.add_static_shape(@shape)
   end
 
-  def update
-    super
-    self.x, self.y = @shape.body.p.x, @shape.body.p.y
-  end
+  # def update
+  #   super
+  #   self.x, self.y = @shape.body.p.x, @shape.body.p.y
+  # end
 end
 
 #Bullets fired by our hero
 
 class PlayerBullet < Chingu::GameObject
+  trait :timer
   attr_accessor :body, :shape, :space
 
   def intialize(space, options={})
@@ -74,8 +75,10 @@ class PlayerBullet < Chingu::GameObject
     body = CP::Body.new(1.0, 150)
 
     vertices = [
-      CP::Vec2.new(-2, 0.5),
-      CP::Vec2.new(2, 0.5) ]
+      CP::Vec2.new(-2, 1),
+      CP::Vec2.new(2, -1),
+      CP::Vec2.new(-2, -1),
+      CP::Vec2.new(2, 1) ]
 
     @shape = CP::Shape::Poly.new(
       body, vertices, CP::Vec2.new(0, 0))
@@ -86,6 +89,8 @@ class PlayerBullet < Chingu::GameObject
     @shape.body.v = CP::Vec2.new(
       ($window.mouse_x - @player.shape.body.x),
       ($window.mouse_y - @player.shape.body.y))
+
+    @space.add_body @shape.body
     @space.add_shape
   end
 
