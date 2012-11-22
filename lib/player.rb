@@ -14,8 +14,9 @@ class Player < Chingu::GameObject
 
 
     @space = space
-
+    @cooling_down = false
     @image = Image["player.png"]
+
     init_physics
   end
 
@@ -68,7 +69,7 @@ class Player < Chingu::GameObject
   def fire
     # return if @cooling_down
     # @cooling_down = true
-    # after(100) { @cooling_down = false }
+    # after(0) { @cooling_down = false }
     PlayerBullet.create(@space, self)
 
   end

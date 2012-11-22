@@ -55,7 +55,7 @@ end
 
 class PlayerBullet < Chingu::GameObject
   # trait :timer
-  attr_accessor :body, :shape, :space
+  attr_accessor :body, :shape, :space, :angle
 
   def initialize(space, player, options={})
     super(options)
@@ -72,7 +72,7 @@ class PlayerBullet < Chingu::GameObject
     #   $window.mouse_x,
     #   $window.mouse_y)
 
-    body = CP::Body.new(1.0, 150)
+    body = CP::Body.new(0.1, INFINITY)
 
     vertices = [
       CP::Vec2.new(-2.0, -2.0),
@@ -80,13 +80,26 @@ class PlayerBullet < Chingu::GameObject
       CP::Vec2.new(2.0, 2.0),
       CP::Vec2.new(2.0, -2.0) ]
 
+    # Calculate angle between player and bullet,
+    # use offset so bullet velocity vectory has
+    # constant magnitude and proper x and y.
+    @ba = Gosu::angle(
+      $window.mouse_x,
+      $window.mouse_y,
+      @player.x,
+      @player.y)
+
+    # @pbx is supposed to mean "Player Bullet X"
+    @pbx = Gosu::offset_x(@ba, 15)
+    @pby = Gosu::offset_y(@ba, 15)
+
     @shape = CP::Shape::Poly.new(
       body, vertices, CP::Vec2.new(0, 0))
 
     @shape.collision_type = :bullet
     @shape.object = self
     @shape.body.p = CP::Vec2.new(@player.x, @player.y)
-    @shape.body.v = CP::Vec2.new(($window.mouse_x - @player.x), ($window.mouse_y - @player.y))
+    @shape.body.v = CP::Vec2.new((@pbx * -40), (@pby * -40))
 
     @space.add_body @shape.body
     @space.add_shape @shape
