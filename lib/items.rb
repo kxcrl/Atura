@@ -29,7 +29,8 @@ class Platform < Chingu::GameObject
       CP::Vec2.new(-190.0, -24.0),
       CP::Vec2.new(-190.0, 24.0),
       CP::Vec2.new(190.0, 24.0),
-      CP::Vec2.new(190.0, -24.0) ]
+      CP::Vec2.new(190.0, -24.0)
+      ]
 
     @shape = CP::Shape::Poly.new(
       @body, vertices, CP::Vec2.new(0,0))
@@ -49,3 +50,43 @@ class Platform < Chingu::GameObject
     self.x, self.y = @shape.body.p.x, @shape.body.p.y
   end
 end
+
+# class Crosshairs <Chingu::GameObject
+#   attr_accessor :body, :shape, :space
+
+#   def initialize(space, options={})
+#     super(options)
+
+#     @space = space
+
+#     @image = Image["crosshairs.png"]
+# #     init_physics
+#   end
+
+#   def init_physics
+#     @body = CP::Body.new(1.0, 150)
+
+#     vertices = [
+#       CP::Vec2.new(-4, -4),
+#       CP::Vec2.new(-4, 4),
+#       CP::Vec2.new(4, 4),
+#       CP::Vec2.new(4, -4)
+#       ]
+
+#     @shape = CP::Shape::Poly.new(
+#       @body, vertices, CP::Vec2.new(0, 0))
+
+#     @shape.object = self
+#     @shape.body.p = CP::Vec2.new($window.mouse_x, $window.mouse_y)
+#     @space.add_shape(@shape)
+#   end
+
+#   def update
+#     super
+#     self.x, self.y = @shape.body.p.x, @shape.body.p.y
+#   end
+# end
+
+
+
+

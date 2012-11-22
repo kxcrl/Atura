@@ -1,4 +1,6 @@
 class Level < GameState
+  trait :timer
+  trait :viewport
   attr_accessor :space, :player
 
   def initialize(options = {})
@@ -12,6 +14,7 @@ class Level < GameState
 
     load_game_objects(@space, file: @file)
     @player = Player.new(@space, x: 200, y: 20 )
+    @crosshairs = Image["crosshairs.png"]
   end
 
   def init_physics
@@ -27,6 +30,7 @@ class Level < GameState
 
   def update
     super
+
     @player.update
     SUBSTEPS.times do
       @player.shape.body.reset_forces
@@ -38,5 +42,6 @@ class Level < GameState
     super
     @background.draw(0,0,0)
     @player.draw
+    @crosshairs.draw($window.mouse_x, $window.mouse_y, 100)
   end
 end
