@@ -1,6 +1,6 @@
 class Player < Chingu::GameObject
   trait :timer
-  attr_accessor :body, :shape
+  attr_accessor :body, :shape, :x, :y
 
   def initialize(space, options={})
     super(options)
@@ -66,11 +66,11 @@ class Player < Chingu::GameObject
   end
 
   def fire
-    return if @cooling_down
-    @cooling_down = true
-    after(100) { @cooling_down = false }
-    
-    PlayerBullet.create(:x => @player.shape.body.p.x, :y => @player.shape.body.p.y)
+    # return if @cooling_down
+    # @cooling_down = true
+    # after(100) { @cooling_down = false }
+    PlayerBullet.create(@space, self)
+
   end
 
   def interaction

@@ -54,18 +54,18 @@ end
 #Bullets fired by our hero
 
 class PlayerBullet < Chingu::GameObject
-  trait :timer
+  # trait :timer
   attr_accessor :body, :shape, :space
 
-  def intialize(space, options={})
+  def initialize(space, player, options={})
     super(options)
+    @player = player
     @space = space
+    @image = Image["crosshairs.png"]
     init_physics
   end
 
   def init_physics
-    @color = Gosu::white
-
     # @angle = Gosu::angle.new(
     #   @player.body.shape.x,
     #   @player.body.shape.y,
@@ -75,23 +75,21 @@ class PlayerBullet < Chingu::GameObject
     body = CP::Body.new(1.0, 150)
 
     vertices = [
-      CP::Vec2.new(-2, 1),
-      CP::Vec2.new(2, -1),
-      CP::Vec2.new(-2, -1),
-      CP::Vec2.new(2, 1) ]
+      CP::Vec2.new(-2.0, -2.0),
+      CP::Vec2.new(-2.0, 2.0),
+      CP::Vec2.new(2.0, 2.0),
+      CP::Vec2.new(2.0, -2.0) ]
 
     @shape = CP::Shape::Poly.new(
       body, vertices, CP::Vec2.new(0, 0))
 
     @shape.collision_type = :bullet
     @shape.object = self
-    @shape.body.p = CP::Vec2.new(@player.shape.body.x, @player.shape.body.y)
-    @shape.body.v = CP::Vec2.new(
-      ($window.mouse_x - @player.shape.body.x),
-      ($window.mouse_y - @player.shape.body.y))
+    @shape.body.p = CP::Vec2.new(@player.x, @player.y)
+    @shape.body.v = CP::Vec2.new(($window.mouse_x - @player.x), ($window.mouse_y - @player.y))
 
     @space.add_body @shape.body
-    @space.add_shape
+    @space.add_shape @shape
   end
 
   def update
@@ -100,12 +98,3 @@ class PlayerBullet < Chingu::GameObject
   end
 
 end
-
-
-
-
-
-
-
-
-
