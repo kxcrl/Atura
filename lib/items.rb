@@ -22,7 +22,7 @@ class Platform < Chingu::GameObject
 
   # Removes new platforms from the editor
   def init_physics
-    @body = CP::Body.new(INFINITY, INFINITY)
+    body = CP::Body.new(INFINITY, INFINITY)
 
 
     vertices = [
@@ -33,7 +33,7 @@ class Platform < Chingu::GameObject
       ]
 
     @shape = CP::Shape::Poly.new(
-      @body, vertices, CP::Vec2.new(0,0))
+      body, vertices, CP::Vec2.new(0,0))
 
     @shape.body.p = CP::Vec2.new(x, y)
     @shape.e = 1.0
@@ -51,7 +51,9 @@ class Platform < Chingu::GameObject
   end
 end
 
-class Bullet < Chingu::GameObject
+#Bullets fired by our hero
+
+class PlayerBullet < Chingu::GameObject
   attr_accessor :body, :shape, :space
 
   def intialize(space, options={})
@@ -61,26 +63,37 @@ class Bullet < Chingu::GameObject
   end
 
   def init_physics
-    @angle = Gosu::angle.new(
-      @player.body.shape.x,
-      @player.body.shape.y,
-      $window.mouse_x,
-      $window.mouse_y)
+    @color = Gosu::white
 
-    @body = CP::Body.new(INFINITY, INFINITY)
+    # @angle = Gosu::angle.new(
+    #   @player.body.shape.x,
+    #   @player.body.shape.y,
+    #   $window.mouse_x,
+    #   $window.mouse_y)
+
+    body = CP::Body.new(1.0, 150)
 
     vertices = [
       CP::Vec2.new(-2, 0.5),
       CP::Vec2.new(2, 0.5) ]
 
     @shape = CP::Shape::Poly.new(
-      @body, vertices, CP::Vec2.new(0, 0))
+      body, vertices, CP::Vec2.new(0, 0))
 
     @shape.collision_type = :bullet
     @shape.object = self
-
+    @shape.body.p = CP::Vec2.new(@player.shape.body.x, @player.shape.body.y)
+    @shape.body.v = CP::Vec2.new(
+      ($window.mouse_x - @player.shape.body.x),
+      ($window.mouse_y - @player.shape.body.y))
     @space.add_shape
   end
+
+  def update
+    super
+    self.x, self.y = @shape.body.p.x, @shape.body.p.y
+  end
+
 end
 
 

@@ -1,4 +1,5 @@
 class Player < Chingu::GameObject
+  trait :timer
   attr_accessor :body, :shape
 
   def initialize(space, options={})
@@ -7,8 +8,9 @@ class Player < Chingu::GameObject
     self.input = {
       holding_d: :move_right,
       holding_a: :move_left,
-      mouse_right: :jump}
-      # MsLef: :fire
+      mouse_right: :jump,
+      holding_mouse_left: :fire,
+      space: :interaction}
 
 
     @space = space
@@ -61,6 +63,17 @@ class Player < Chingu::GameObject
         (@shape.body.p.x + @shape.body.v.x),
         (@shape.body.p.y - 40 + @shape.body.v.y)), 1 )
     end
+  end
+
+  def fire
+    return if @cooling_down
+    @cooling_down = true
+    after(100) { @cooling_down = false }
+    
+    PlayerBullet.create(:x => self.x, :y => self.y)
+  end
+
+  def interaction
   end
 
   def update
