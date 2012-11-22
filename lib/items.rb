@@ -101,6 +101,10 @@ class PlayerBullet < Chingu::GameObject
     @shape.body.p = CP::Vec2.new(@player.x, @player.y)
     @shape.body.v = CP::Vec2.new((@pbx * -40), (@pby * -40))
 
+    # vars used to see if bullet is beyond viewport
+    # so it can be destroyed
+    # @offscreen.y = (@shape.body.p.y - $window.height)
+
     @space.add_body @shape.body
     @space.add_shape @shape
   end
@@ -108,6 +112,11 @@ class PlayerBullet < Chingu::GameObject
   def update
     super
     self.x, self.y = @shape.body.p.x, @shape.body.p.y
+    
+    # if @offscreen.y > 50
+    # destroy
+    # end
+
   end
 
 end
