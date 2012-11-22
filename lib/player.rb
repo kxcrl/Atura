@@ -5,9 +5,10 @@ class Player < Chingu::GameObject
     super(options)
 
     self.input = {
-      holding_right: :move_right,
-      holding_left: :move_left,
-      up: :jump}
+      holding_d: :move_right,
+      holding_a: :move_left,
+      mouse_right: :jump}
+      # MsLef: :fire
 
 
     @space = space
